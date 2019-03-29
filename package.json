@@ -2,8 +2,10 @@
   "name": "certica-sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "mocha -r ts-node/register tests/**/*test.ts"
   },
   "keywords": [],
