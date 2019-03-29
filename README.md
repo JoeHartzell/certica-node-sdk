@@ -81,7 +81,7 @@ import axios from 'axios';
 const partnerId = "public";
 const partnerKey = "2jfaWErgt2+o48gsk302kd";
 
-const sdk = new SDK(partnerKey, partnerId);
+const sdk = new CerticaSDK(partnerKey, partnerId);
 
 const instance = axios.create({
     params: sdk.params(),
