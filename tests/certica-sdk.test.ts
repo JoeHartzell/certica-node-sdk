@@ -48,7 +48,7 @@ describe("CerticaSDK", () => {
             const sdk = new CerticaSDK(key, id);
             const expires = new Date();
             const userId = "user";
-            const params = sdk.params(expires, userId);
+            const params = sdk.params(expires, { userId });
             const signature = crypto
                 .createHmac("sha256", key)
                 .update(`${expires.getTime()}\n${userId}`)
@@ -69,7 +69,7 @@ describe("CerticaSDK", () => {
             const params = sdk.params(expires);
             const signature = crypto
                 .createHmac("sha256", key)
-                .update(`${expires.getTime()}`)
+                .update(`${expires.getTime()}\n`)
                 .digest("base64");
 
             expect(params["auth.expires"]).to.equal(expires.getTime());
@@ -91,7 +91,7 @@ describe("CerticaSDK", () => {
             const params = sdk.params(expires);
             const signature = crypto
                 .createHmac("sha256", "12345")
-                .update(`${expires.getTime()}`)
+                .update(`${expires.getTime()}\n`)
                 .digest("base64");
 
             expect(params["auth.expires"]).to.equal(expires.getTime());
@@ -113,7 +113,7 @@ describe("CerticaSDK", () => {
             const params = sdk.params(expires);
             const signature = crypto
                 .createHmac("sha256", key)
-                .update(`${expires.getTime()}`)
+                .update(`${expires.getTime()}\n`)
                 .digest("base64");
 
             expect(params["auth.expires"]).to.equal(expires.getTime());

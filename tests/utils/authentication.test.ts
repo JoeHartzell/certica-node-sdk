@@ -1,4 +1,4 @@
-import { signToken } from '../src/utils';
+import { signToken } from "../../src/utils/authentication";
 import crypto from 'crypto';
 import { expect } from 'chai';
 
@@ -12,7 +12,7 @@ describe("utils", () => {
             const userId = "1234";
             const expires = new Date().getTime();
 
-            const signature = signToken(key, expires, userId);
+            const signature = signToken(key, expires, { userId });
             const expected = crypto
                 .createHmac("sha256", key)
                 .update(`${expires}\n${userId}`)
@@ -31,7 +31,7 @@ describe("utils", () => {
             const signature = signToken(key, expires);
             const expected = crypto
                 .createHmac("sha256", key)
-                .update(`${expires}`)
+                .update(`${expires}\n`)
                 .digest("base64");
 
             expect(signature).to.equal(expected);

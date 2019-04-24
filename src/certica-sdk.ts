@@ -1,4 +1,5 @@
-import { signToken } from './utils';
+import { signToken } from './utils/authentication';
+import { ISignTokenOptions } from './utils/authentication';
 
 export default class CerticaSDK {
 
@@ -17,19 +18,19 @@ export default class CerticaSDK {
      * @param expires (optional) when the auth.signature will expire. Defaults to 2 hours.
      * @param userId (optional) userId that will be associated with the request.
      */
-    public params(expires?: Date, userId?: number | string): IAuthenticationParams {
+    public params(expires?: Date, options: ISignTokenOptions = {}): IAuthenticationParams {
         expires = expires || this.defaultExpires();
         const signature = signToken(
             this.key, 
             expires.getTime(), 
-            userId
+            options
         );
 
         return {
             "auth.expires": expires.getTime(),
             "auth.signature": signature,
             "partner.id": this.id,
-            "user.id": userId,
+            "user.id": options.userId
         };
     }
 

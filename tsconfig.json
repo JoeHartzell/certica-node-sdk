@@ -62,7 +62,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": [
-    "src/**/*"
+    "src/**/*", "tests/utils/authentication.test.ts", "tests/utils/utils.test.ts"
   ],
   "exclude": [
     "node_modules",
